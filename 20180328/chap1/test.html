@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="/JavaScriptStudy/util/util.js"></script>
+
+<script type="text/javascript">
+	function myFun() {
+		var str = "KH정보교육원";
+		alert(str);
+		
+		var result = str.substring(2,4); // "KH정보교육원" 의 2번째 인덱스인 "정" 부터
+		                                 // "KH정보교육원" 의 4번째 인덱스인 "교" 앞까지만
+		                                 // 추출해라. 즉, "정보" 이다.
+		alert(result);
+		
+		str = "김시온송지섭만만세!!!";
+		alert(str);
+		
+		result = str.substr(3,6); // "김시온송지섭만만세!!!" 의 3번째 인덱스인 "송" 부터 6글자를 추출해라.        
+		alert(result);            // 즉, "송지섭만만세" 이다. 
+		
+		str = "1234";
+		alert("str의 타입 : " + typeof str);  // string
+		
+		str += 1;   // str = str + 1;  ==> str이 string 타입이므로 + 는 문자열결합으로 된다.
+		alert(str); // 12341
+		
+		// 문자열을 숫자타입으로 바꾼다.
+		// 숫자타입이 정수냐? 실수냐? 에 따라 사용되어지는 메소드는 다르다.
+		// parseInt()   --> 문자열을 정수로 변환
+		// parseFloat() --> 문자열을 실수로 변환
+		
+		str = "1234";
+		var num = parseInt(str);
+		alert("num의 테이터 타입 : " + typeof num); // number
+		
+		num += 1;   // num 의 데이터타입이 number 이므로 + 는 더하기 가 된다.
+		alert(num);  // 1235
+		
+	}
+	
+	function myfunChkJumin(jubun) {
+		var result = funChkJumin(jubun);
+		alert(result);
+	}
+
+</script>
+
+</head>
+<body>
+	
+	<button type="button" onClick="myFun();">확인</button>
+	<button type="button" onClick="myfunChkJumin('9203271234567');">주민번호검사</button>
+	
+</body>
+</html>
+
+
+
+
+

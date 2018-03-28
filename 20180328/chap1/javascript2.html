@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>1-2.회원가입(정규표현식을 통한 데이터 검사)</title>
+
+<style type="text/css">
+   /* 주석문  */
+
+   #underline {text-decoration: underline;}    
+   /* id 를 잡을때는 #을 사용한다.  class 를 잡을때는 . 을 사용한다. */
+   
+   table {border: 1px solid gray; 
+          border-collapse: collapse;
+          /* border-collapse: collapse; 은 셀간격을 없애겠다는 말이다. */
+          /* width: 560px; */
+          width: 65%; 
+          /* margin: 20%; ==> 자신과 다른 태그사이의 외부간격을 상하좌우 20%(모니터폭의 20%)로 하겠다는 말이다.*/ 
+          margin-bottom: 3%;
+          }
+          
+   td {border: 1px solid gray;
+       /* padding: 1%;  ==> 데이터문자와 셀간의 상하좌우 여백크기를 1%(모니터폭의 1%)로 하겠다는 말이다.  */
+       padding-left: 3%;
+       padding-top: 1%;
+       padding-bottom: 1%;
+   }
+   
+   colgroup#first {background-color: #d0d0d0;
+                   width: 24%;
+                   font-weight: bold;
+                   text-align: left;}
+                   
+   #btnOK {margin-right: 3%;}               
+   
+</style>
+
+<script type="text/javascript" src="/JavaScriptStudy/util/util.js"></script>
+
+<script type="text/javascript">
+    function goSubmit() {
+    //	alert("goSubmit()함수 호출함");
+    
+        var val = document.frmInput.ID.value.trim();
+    /* == 자바스크립트에서는 데이터 타입이 정해져 있지 않고 입력되어지는 데이터값에 따라
+                  타입이 정해진다.
+          1. undefined : 변수가 정의되지 않거나 값이 없을때   
+          2. number    : 데이터타입이 숫자일때
+          3. string    : 데이터타입이 문자열일때
+          4. boolean   : 데이터타입이 true, false 일때
+          5. object    : 데이터타입이 객체 또는 배열 일때
+    */
+    //    alert(typeof val);   ==> 입력되어진 값의 타입을 알아보기 위한 것!!
+    //    결과값 : string
+    /*
+         alert("a"+"    b    "+"c");
+         alert("a"+"    b    ".trim()+"c");
+         alert("    b    ".length);
+         alert("    b    ".trim().length);
+    */
+         if(val == "") {
+        	 alert("ID가 입력되지 않았습니다.");
+        	 document.frmInput.ID.value = "";
+        	 document.frmInput.ID.focus();
+        	 return;  // 종료
+         }
+    
+         var regexp_pw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g; 
+         
+         val = document.frmInput.pw.value;
+         
+         var bool = regexp_pw.test(val);
+         
+         if(!bool) {
+        	 alert("암호는 8글자이상 15글자 이하로 영문자,숫자,특수기호가 혼합되어야만 합니다.");
+        	 document.frmInput.pw.value = "";
+        	 document.frmInput.pw.focus();
+        	 return;  // 종료
+         }
+         
+         if(document.frmInput.pw.value != document.frmInput.pw2.value) {
+        	 alert("암호값과 암호확인값이 일치하지 않습니다.");
+        	 document.frmInput.pw.value = "";
+        	 document.frmInput.pw2.value = "";
+        	 document.frmInput.pw.focus();
+        	 return;  // 종료
+         }
+    
+         val = document.getElementById("name").value.trim();
+         
+         if(val == "") {
+        	 alert("이름이 입력되지 않았습니다.");
+        	 document.getElementById("name").value = "";
+        	 document.getElementById("name").focus();
+        	 return;  // 종료
+         }
+         
+         var regexp_jubun = /[0-9][0-9][0-9][0-9][0-9][0-9][1-4][0-9][0-9][0-9][0-9][0-9][0-9]/g;
+         
+         val = document.getElementById("jubun").value;
+         
+         bool = regexp_jubun.test(val);
+         
+         if(!bool) {
+        	 alert("주민번호는 -를 제외한 숫자로만 입력하세요!!");
+        	 document.getElementById("jubun").value = "";
+        	 document.getElementById("jubun").focus();
+        	 return;  // 종료  
+         }
+         
+         var result = funChkJumin(val);
+         // funChkJumin(val); 은 /JavaScriptStudy/util/util.js 에 정의된 함수임.
+         
+         if( result != 1 ) {
+        	 alert("올바른 주민번호를 입력하세요!!");
+        	 document.getElementById("jubun").value = "";
+        	 document.getElementById("jubun").focus();
+        	 return;  // 종료 
+         }
+         
+         var regexp_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+         // e메일을 검사해주는 정규표현식 객체 생성
+         
+		 val = document.getElementById("email").value;
+         
+		 bool = regexp_email.test(val); // 정규표현식객체.test(검사할대상값); 을 하면 표현식에 올바른 데이터이라면 true 가 나오고, 표현식에 맞지 않는 데이터 이라면  false 가 나온다. 
+         
+         if(!bool) {
+        	 alert("e메일 형식에 맞도록 입력하세요!!");
+        	 document.getElementById("email").value = "";
+        	 document.getElementById("email").focus();
+        	 return;  // 종료
+         }
+         
+		 var regexp_number = /^[0-9]+$/;
+		 
+         var tel1 = document.getElementById("tel1").value;
+         var tel2 = document.getElementById("tel2").value;
+         var tel3 = document.getElementById("tel3").value;
+         
+         var bool_1 = regexp_number.test(tel1);
+         var bool_2 = regexp_number.test(tel2);
+         var bool_3 = regexp_number.test(tel3);
+         
+         if( !(bool_1 && bool_2 && bool_3) ) {
+        	 alert("전화번호는 숫자만 입력이 가능합니다.");
+        	 document.getElementById("tel1").value = "";
+        	 document.getElementById("tel2").value = "";
+        	 document.getElementById("tel3").value = "";
+        	 document.getElementById("tel1").focus();
+        	 return;  // 종료
+         }
+         
+		 val = document.getElementById("address").value.trim();
+         
+         if(val == "") {
+        	 alert("주소가 입력되지 않았습니다.");
+        	 document.getElementById("address").value = "";
+        	 document.getElementById("address").focus();
+        	 return;  // 종료
+         }
+         
+         document.frmInput.submit(); 
+         // 폼에 입력된 데이터를 action="memberRegister.jsp" 페이지로 전송한다. 
+         
+         alert("회원가입완료!!");
+        
+    }// end of goSubmit()------------------------
+</script>
+
+</head>
+<body>
+	<div align="center">
+	<h2 id="underline">회원가입</h2> <!-- 주석문  -->
+	
+	<form name="frmInput" method="get" action="memberRegister.jsp">
+		<table>
+			<colgroup id="first" span="1" />
+			<tr>
+				<td>ID</td>
+				<td><input type="text" name="ID" size="10" /></td>
+			</tr>
+			<tr>
+				<td>암호</td>
+				<td><input type="password" name="pw" size="10"/></td>
+			</tr>
+			<tr>
+				<td>암호확인</td>
+				<td><input type="password" name="pw2" size="10"/></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" id="name" name="name" size="10" /></td>
+			</tr>
+			<tr>
+				<td>주민번호(-제외)</td>
+				<td><input type="text" id="jubun" name="jubun" maxlength="13" size="15" /></td>
+			</tr>
+			<tr>
+				<td>e메일</td>
+				<td><input type="text" id="email" name="email" size="30" /></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td>
+				<input type="text" id="tel1" name="tel1" maxlength="3" size="4" />&nbsp;-
+				<input type="text" id="tel2" name="tel2" maxlength="4" size="4" />&nbsp;-
+				<input type="text" id="tel3" name="tel3" maxlength="4" size="4" />
+				<input type="radio" name="tel_type" id="handphone" value="1" checked /><label for="handphone">핸드폰</label>
+				<input type="radio" name="tel_type" id="housephone" value="2" /><label for="housephone">집</label>
+				<input type="radio" name="tel_type" id="companyphone" value="3" /><label for="companyphone">직장</label>
+				</td>
+			</tr>
+			<tr>
+				<td>주소</td>
+				<td><input type="text" id="address" name="address" size="60" /></td>
+			</tr>
+		</table>
+		<!-- <br/> -->
+		<input id="btnOK" type="button" value="추가하기" onClick="goSubmit();" />
+		<input type="reset" value="지우기" />
+	</form>
+	
+	</div>
+</body>
+</html>
+
+
