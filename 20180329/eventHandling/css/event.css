@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+
+.buttons {width: 100px;
+		  border: 2px solid orange;
+		  margin: 20px;
+		  padding: 5px;
+		  color: #ff0000;
+		  background-color: yellow;
+		  font-size: 15pt;}
+		  
+.bold {font-weight: bold;}
+.italic {font-style: italic;}
+
+.cnt {font-weight: bold;
+		color: red;
+		font-size: 17pt
+		text-decoration: underline;}
+
+#fonts {font-family: 휴먼옛체,궁서체; /* 휴먼옛체가 있으면 해주고 없으면 궁서체로 해줘라   */
+		font-style: italic;
+		font-size: 20pt;
+		font-weight: bold;
+		color: #ff0000;
+		background-color: yellow;
+}
+

@@ -1,0 +1,15 @@
+chap1
+	1-1. 어느 버튼을 클릭했는지 확인하기(bind)
+	1-2. 어느 버튼을 더블클릭했는지 확인하기
+	1-3. html() VS text() 함수의 차이점알기, val() 함수를 이용한 input 태그의 value값 알아오기
+
+chap2
+	1. 버튼을 한번 클릭하여 이벤트 발생한 이후 다음 클릭에는 이벤트 비활성화 시키기(unbind)
+	
+chap3
+	3-1. 마우스 이벤트 처리하기(마우스를 눌렀을때 mousedown)
+	3-2. 마우스 이벤트 처리하기(Click, event.target 속성)
+
+chap4
+	4-1. 마우스 이벤트 처리하기(마우스를 버튼위로 가져갔을때 mouseover / 마우스를 버튼위로 가져갔다가 나갈때 mouseout)
+	4-2. 연예인 사진 보이기 감추기(mouseover, mouseout,setImg(imgFile))

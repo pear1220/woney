@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>1-3. html() VS text() 함수의 차이점알기, val() 함수를 이용한 input 태그의 value값 알아오기</title>
+<!-- jQuery에서 지원되는 html()함수, text()함수, val()함수를 사용하여 
+	태그들의 값들을 알아올수 있고, 반대로 원하는 값을 태스속에 넣을 수 있다. 
+	
+	$("선택자").html()
+	==> 선택자(selector) 태그내의 존재하는 자식태그들을 몽땅 읽어올때 사용하는 함수
+		※태그를 동적으로 추가할때 주로 사용되는 함수이다.
+		
+	$("선택자").text()
+	==> 선택자(selector) 태그내의 존재하는 자식태그들 중에 html 태그들은 모두 제외한체 문자열만 알아오려고 할때 사용하는 함수
+		※데이터 값을 넣고자 할때 html 태그까지 모두 문자로 인식시켜준다.
+
+	$("선택자").val()
+	==> input 태그에 정의된 value 속성의 값을 알아오고자 할때 사용하는 함수
+-->
+
+<link rel="stylesheet" type="text/css" href="/JqueryStudy/eventHandling/css/event.css"> <!-- 외부에 만든 css를 끌어온다. -->
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		var name="";
+		
+		$(".view").hide();
+		
+		$("#btnview").click(function () {
+			var firstdiv = $("#firstdiv").html(); 
+			console.log(firstdiv);
+			/*html()는 태그까지 가져온다.
+			<h3>대한민국<br>
+				<span id="fonts">KOREA</span>SEOUL
+			</h3>
+	 		*/
+
+	 		$(".setHtml").html(firstdiv);
+	 		$(".setHtml2").text(firstdiv);
+	 		
+			firstdiv = $("#firstdiv").text();
+			console.log(firstdiv);
+			/*text()는 글자만 읽어온다.
+			대한민국
+			KOREASEOUL 
+			*/
+			$(".setText").html(firstdiv);
+			$(".setText2").html(firstdiv);
+			
+			$(".view").show();
+			
+			name = $("#name").val();
+			// 선택자의 id가 name인 태그의 value값을 읽어온다.
+			
+			var result = "<span style='color:red; font-size:16pt; font-weight: bold;'>"+name+"</span> 을 입력하셨군요"
+			$("#nameResult").html(result);
+			$("#nameResult").show();
+			
+		//	$("#name").val("하하하 호호호호");
+			// 선택자의 id가 name인 태그의 value값을 "하하하 호호호호"를 넣어준다.
+			$("#name").val("");
+		});
+		
+		$("#btnhide").click(function () {
+			$(".view").hide();
+			$("#nameResult").hide();
+			$("#name").val(name);
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<div style="margin-top: 5%;" id="firstdiv">
+		<h3>대한민국<br/>
+			<span id="fonts">KOREA</span>SEOUL
+		</h3>
+	</div>
+	
+	<button type="button" id="btnview">보이기</button>
+	<button type="button" id="btnhide">감추기</button>
+	
+	<hr style="width: 100%; height: 1px; background-color: red">
+	<div class="view setHtml"></div>
+	<div class="view setHtml2"></div>
+	
+	<hr style="width: 100%; height: 1px; background-color: blue">
+	<div class="view setText"></div>
+	<div class="view setText2"></div>
+	
+	<div style="margin-top: 3%;">
+		<input type="text" id="name" size="10" value="이순신" />
+	</div>
+	
+	<div id="nameResult" ></div>
+</body>
+</html>
