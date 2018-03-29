@@ -1,0 +1,594 @@
+3일차
+
+1. 메소드 정의
+
+//동일한 경로에 있을 경우 import를 할 필요가 없다 다른 경로의 클래스 파일이 있으면 import시켜줘야된다.
+public class VoidMethodTestMain
+{
+
+	public static void main(String[] args) 
+	{
+		Member member1 = new Member("kangkc", "qwer1234", "강감찬", 34, 178.9, 250);
+		Member member2 = new Member("suji", "asdf0070", "수지", 29, 188.2, 240);
+		
+		member1.infoPrint();
+		//메소드는 클래스명과 달라야 하며 첫글자는 소문자이다.
+
+		System.out.println("");
+
+		member2.infoPrint(); //행위에 대한 호출 member2에 있는 값을 Meber 클래스 안에 있는 infoPrint() 메소드 안에있는 내용을 실행
+
+		System.out.println("\r\n======리턴 값이 있는 메소드(정보값 변경 전)======\r\n");
+		
+		String  name = member1.getName();
+		String passwd = member1.getPasswd();
+		int age = member1.getAge();
+		double height = member1.getHeight();
+		int HopeYearsal = member1.getHopeYearsal();
+		
+		
+		
+		System.out.println(name + "님의 암호는 " + passwd + " 이고 \n나이는 " + age + "세이고 \n신장은 " + height + "cm 이고 \n희망연봉은 " + HopeYearsal +"만원 입니다.");
+
+		// 강감찬님의 암호는 qwer1234이고 나이는 34세이고 신장은 178.9cm 입니다.
+
+		System.out.println("\r\n======정보값 변경 후======\r\n");
+		
+		member1.changeMyinfo("abcd", 25, 167.5, 300);
+
+		name = member1.getName();
+		passwd = member1.getPasswd();
+		age = member1.getAge();
+		height = member1.getHeight();
+		HopeYearsal = member1.getHopeYearsal();
+
+		System.out.println(name + "님의 암호는 " + passwd + " 이고 \n나이는 " + age + "세이고 \n신장은 " + height + "cm 이고 \n희망연봉은 " + HopeYearsal +"만원 입니다.");
+		// 강감찬님의 암호는 abcd이고 나이는 25세이고 신장은 167.5cm 입니다.
+	
+		System.out.println("\n===========희망 월급 변경을 문자열로 리턴===========\n");
+		String result = member1.setHopeMothsal(400);
+
+		System.out.println(result);
+		
+		System.out.println("\n===========퀴즈=========\n");
+
+		member1.showInfomation();
+		/*
+			=== 강감찬님의 정보 ===
+			1. 아이디 : kangkc
+			2. 암호 : abcd 
+			3. 성명 : 강감찬
+			4. 나이 : 25세
+			5. 신장 : 167.5cm
+			6. 희망 월급여 : 400만원
+		*/
+		
+		
+		System.out.println("종료시각: " + MyUtil.getNowTime() );
+
+	}
+}
+
+===========================================================================================================================
+
+/*
+	※ 메소드(method)란?
+	
+	-- 클래스안에서 구현되어진 일종의 함수라고 생각하면 된다.
+	   쉽게말해서, 어떠한 행동이나 행위를 구체적으로 서술하여 정의한것 이라고 보면 된다.
+
+	-- 메소드(method)는 반드시 리턴타입을 정의해주어야 한다.
+	   리턴타입이 있으면 그 리턴타입에 해당하는 타입(String, int, double..)을 기술해주고
+	   리턴타입이 없는 메소드(method)이라면 리턴타입이 없습니다라는 뜻의 void를 기술해주어야 한다.
+
+	※ 메소드(method)의 종류
+	
+	1. 인스턴스 메소드(instance method)
+		-- 객체명.메소드명();
+
+	2. 스테틱 메소드(static method == 클래스 메소드)
+		-- 클래스명.메소드명();
+*/
+
+public class Member
+{
+	String userid;
+	String passwd;
+	String name;
+	int age;
+	double height;
+	int hopeMonthsal;
+	
+	public Member(){ }
+
+	public Member(String userid, String passwd, String name, int age, double height,int hopeMonthsal){
+		this.userid = userid;
+		this.passwd = passwd;
+		this.name = name;
+		this.age = age;
+		this.height = height;
+		this.hopeMonthsal = hopeMonthsal;
+	
+	}
+
+	//인스턴스 메소드 정의
+	public void infoPrint(){ //void 리턴타입이 없다.
+		System.out.println("아이디: " + userid);
+		System.out.println("암 호: " + passwd);
+		System.out.println("성 명: " + name);
+		System.out.println("나 이: " + age + "세");
+		System.out.println("신장: " + height + "cm");
+	}
+	
+	//리턴값을 넣은 메소드
+	public String getName() { 
+		return name;
+	}
+	
+	public int getAge() { 
+		return age;
+	}
+	public double getHeight() {
+		return height;
+	}
+
+	public String getPasswd(){
+		return passwd;
+	}
+
+//정보 변경
+	public void changeMyinfo(String passwd, int age, double height, int hopeMonthsal) {
+		this.passwd = passwd;
+		this.age = age;
+		this.height = height;
+		this.hopeMonthsal = hopeMonthsal;
+
+	}
+	
+
+	//get 값을 얻어온다 set 값을 넣어준다
+	public int getHopeYearsal() {
+		return hopeMonthsal * 12;
+	}
+
+	public String setHopeMothsal(int newHopeMothsal){
+		int beforeChangeSal = hopeMonthsal;
+		hopeMonthsal = newHopeMothsal;
+		return name + "님의 기존 희망월급여 " + beforeChangeSal + "만원에서 " + hopeMonthsal + "만원으로 변경되었습니다.\n";
+	}
+
+	public void showInfomation(){
+		/* System.out.println("=== "+name+"님의 정보 ===");
+		System.out.println("1. 아이디: "s + userid);
+		System.out.println("2. 암 호: " + passwd);
+		System.out.println("3. 성 명: " + name);
+		System.out.println("4. 나 이: " + age + "세");
+		System.out.println("5. 신장: " + height + "cm"); 
+		System.out.println("6. 희망 월급여: " + hopeMonthsal + "만원");
+		*/
+
+		String result = "=== "+name+"님의 정보 ===\n" +
+						"1. 아이디: " + userid +
+						"\n2. 암 호: " + passwd +
+						"\n3. 성 명: " + name +
+						"\n4. 나 이: " + age + "세"+
+						"\n5. 신장: " + height + "cm" +
+						"\n6. 희망 월급여: " + hopeMonthsal + "만원";
+		System.out.println(result);
+	}
+
+		//*** static 메소드(클래스 메소드) 정의 ***//
+
+
+}
+
+2. 시간에 대한 format
+
+import java.util.Date;
+public class  TodayTest
+{
+	public static void main(String[] args) 
+	{
+		// --- 현재 시각 나타내기 --- //
+		Date now = new Date();
+		System.out.println("현재시각 : " + now);
+		
+		System.out.println("");
+
+		String today = String.format("%tF , %tT", now, now);
+		System.out.println("현재시각 : " + today);
+
+		/*
+			<참고>
+			날짜 타입 format			설명
+			----------------------------------------------------------
+			%tF					날짜를 yyyy-mm-dd 형식으로 포맷해주는 것
+			%tT					날짜의 시각을 HH:MM:SS 형식으로 포맷해주는 것
+			%tP					오전, 오후를 출력
+			%tA					요일명 출력
+			%tY					4자리 년도만 출력
+			%tB					월의 이름(January,February ...)
+			%tm					월의 01,02,03 ~~10,11,12 
+			%td					일수를 1~31 로 출력
+			%te					%td와 동일함
+			%tk					시간을 0~23으로 출력
+			%tl					시간을 1~12으로 출력
+			%tM					분을 00~59으로 출력
+			%ts					초를 00~59으로 출력
+			%tz					타임존을 출력(한국은 KST로 나옴)
+
+		*/
+	}
+}
+
+
+3. static 메소드 이용
+
+public class CalculatorMain
+{
+	
+	public static void main(String[] args) 
+	{
+		Calculator cal = new Calculator();
+		int sum = cal.plus(10,20);
+
+		System.out.println("10+20="+sum);
+
+		System.out.println("");
+
+		sum = Calculator.hap(20,30);
+
+		System.out.println("20+30="+sum);
+
+		System.out.println("\n\n ==종료시각== :"+ MyUtil.getNowTime());
+	}
+}
+
+======================================================================================
+
+public class Calculator
+{
+	public int plus(int x, int y){
+		int result = x + y;
+		return result;
+	}
+
+	public static int hap(int x, int y){
+		int result = x + y;
+		return result;
+	}
+
+}
+
+
+=====================================================================================
+
+import java.util.Date;
+
+public class MyUtil
+{
+	// --- 현재시각을 나타내기 ---
+	public static String getNowTime(){
+		Date now = new Date();
+		String today = String.format("%tF %tT", now, now);
+		return today;
+	}
+}
+
+=====================================================================================
+
+static 메소드를 이용하여 100,000,000원 의 콤마를 출력하라
+//동일한 경로에 있을 경우 import를 할 필요가 없다 다른 경로의 클래스 파일이 있으면 import시켜줘야된다.
+
+public class VoidMethodTestMain
+{
+
+	public static void main(String[] args) 
+	{
+		Member member1 = new Member("kangkc", "qwer1234", "강감찬", 34, 178.9, 250);
+		Member member2 = new Member("suji", "asdf0070", "수지", 29, 188.2, 240);
+		
+		
+		member1.infoPrint();
+		//메소드는 클래스명과 달라야 하며 첫글자는 소문자이다.
+
+		System.out.println("");
+
+		member2.infoPrint(); //행위에 대한 호출 member2에 있는 값을 Meber 클래스 안에 있는 infoPrint() 메소드 안에있는 내용을 실행
+
+		System.out.println("\r\n======리턴 값이 있는 메소드(정보값 변경 전)======\r\n");
+		
+		String  name = member1.getName();
+		String passwd = member1.getPasswd();
+		int age = member1.getAge();
+		double height = member1.getHeight();
+		int HopeYearsal = member1.getHopeYearsal();
+		
+		
+		
+		System.out.println(name + "님의 암호는 " + passwd + " 이고 \n나이는 " + age + "세이고 \n신장은 " + height + "cm 이고 \n희망연봉은 " + HopeYearsal +"만원 입니다.");
+
+		// 강감찬님의 암호는 qwer1234이고 나이는 34세이고 신장은 178.9cm 입니다.
+
+		System.out.println("\r\n======정보값 변경 후======\r\n");
+		
+		member1.changeMyinfo("abcd", 25, 167.5, 300);
+
+		name = member1.getName();
+		passwd = member1.getPasswd();
+		age = member1.getAge();
+		height = member1.getHeight();
+		HopeYearsal = member1.getHopeYearsal();
+
+		System.out.println(name + "님의 암호는 " + passwd + " 이고 \n나이는 " + age + "세이고 \n신장은 " + height + "cm 이고 \n희망연봉은 " + HopeYearsal +"만원 입니다.");
+		// 강감찬님의 암호는 abcd이고 나이는 25세이고 신장은 167.5cm 입니다.
+	
+		System.out.println("\n===========희망 월급 변경을 문자열로 리턴===========\n");
+		String result = member1.setHopeMothsal(400);
+
+		System.out.println(result);
+		
+		System.out.println("\n===========퀴즈=========\n");
+
+		member1.showInfomation();
+		/*
+			=== 강감찬님의 정보 ===
+			1. 아이디 : kangkc
+			2. 암호 : abcd 
+			3. 성명 : 강감찬
+			4. 나이 : 25세
+			5. 신장 : 167.5cm
+			6. 희망 월급여 : 400만원
+		*/
+		
+		
+		System.out.println("\n========인스턴스 메소드 사용=========\n");
+
+		Member member3 = new Member("leess", "1234", "이순신", 49, 180.2, 5000000);
+
+
+		//String strYearsal = member3.getStrYearSal();
+
+		System.out.println(member3.getName() + "님의 희망연봉은 " + member3.getStrYearSal() + "원 입니다.\n");
+
+
+		System.out.println("\n========클래스 메소드 사용=========\n");
+		
+		System.out.println("종료시각: " + MyUtil.getNowTime() );
+		
+	}
+}
+
+=================================================================================================
+/*
+	※ 메소드(method)란?
+	
+	-- 클래스안에서 구현되어진 일종의 함수라고 생각하면 된다.
+	   쉽게말해서, 어떠한 행동이나 행위를 구체적으로 서술하여 정의한것 이라고 보면 된다.
+
+	-- 메소드(method)는 반드시 리턴타입을 정의해주어야 한다.
+	   리턴타입이 있으면 그 리턴타입에 해당하는 타입(String, int, double..)을 기술해주고
+	   리턴타입이 없는 메소드(method)이라면 리턴타입이 없습니다라는 뜻의 void를 기술해주어야 한다.
+
+	※ 메소드(method)의 종류
+	
+	1. 인스턴스 메소드(instance method)
+		-- 객체명.메소드명();
+
+	2. 스테틱 메소드(static method == 클래스 메소드)
+		-- 클래스명.메소드명();
+*/
+
+public class Member
+{
+	String userid;
+	String passwd;
+	String name;
+	int age;
+	double height;
+	int hopeMonthsal;
+	
+	public Member(){ }
+
+	public Member(String userid, String passwd, String name, int age, double height,int hopeMonthsal){
+		this.userid = userid;
+		this.passwd = passwd;
+		this.name = name;
+		this.age = age;
+		this.height = height;
+		this.hopeMonthsal = hopeMonthsal;
+	
+	}
+
+	//인스턴스 메소드 정의
+	public void infoPrint(){ //void 리턴타입이 없다.
+		System.out.println("아이디: " + userid);
+		System.out.println("암 호: " + passwd);
+		System.out.println("성 명: " + name);
+		System.out.println("나 이: " + age + "세");
+		System.out.println("신장: " + height + "cm");
+	}
+	
+	//리턴값을 넣은 메소드
+	public String getName() { 
+		return name;
+	}
+	
+	public int getAge() { 
+		return age;
+	}
+	public double getHeight() {
+		return height;
+	}
+
+	public String getPasswd(){
+		return passwd;
+	}
+
+//정보 변경
+	public void changeMyinfo(String passwd, int age, double height, int hopeMonthsal) {
+		this.passwd = passwd;
+		this.age = age;
+		this.height = height;
+		this.hopeMonthsal = hopeMonthsal;
+
+	}
+	
+
+	//get 값을 얻어온다 set 값을 넣어준다
+	public int getHopeYearsal() {
+		return hopeMonthsal * 12;
+	}
+
+	public String setHopeMothsal(int newHopeMothsal){
+		int beforeChangeSal = hopeMonthsal;
+		hopeMonthsal = newHopeMothsal;
+		return name + "님의 기존 희망월급여 " + beforeChangeSal + "만원에서 " + hopeMonthsal + "만원으로 변경되었습니다.\n";
+	}
+
+	public void showInfomation(){
+		/* System.out.println("=== "+name+"님의 정보 ===");
+		System.out.println("1. 아이디: "s + userid);
+		System.out.println("2. 암 호: " + passwd);
+		System.out.println("3. 성 명: " + name);
+		System.out.println("4. 나 이: " + age + "세");
+		System.out.println("5. 신장: " + height + "cm"); 
+		System.out.println("6. 희망 월급여: " + hopeMonthsal + "만원");
+		*/
+
+		String result = "=== "+name+"님의 정보 ===\n" +
+						"1. 아이디: " + userid +
+						"\n2. 암 호: " + passwd +
+						"\n3. 성 명: " + name +
+						"\n4. 나 이: " + age + "세"+
+						"\n5. 신장: " + height + "cm" +
+						"\n6. 희망 월급여: " + hopeMonthsal + "만원";
+		System.out.println(result);
+	}
+
+		//*** static 메소드(클래스 메소드) 정의 ***//
+
+		public String getStrYearSal(){
+			return MyUtil.getMoney(hopeMonthsal * 12);
+		}
+
+
+}
+
+=======================================================================================================
+
+import java.util.Date;
+import java.text.DecimalFormat;
+
+public class MyUtil
+{
+	// --- 현재시각을 나타내기 ---
+	public static String getNowTime(){
+		Date now = new Date();
+		String today = String.format("%tF %tT", now, now);
+		return today;
+	}
+
+	// --- 숫자를 입력받아서 세자리 마다 콤마(,)를 찍어서 리턴시켜주는 메소드 생성하기 ---
+	public static String getMoney(long money){
+		DecimalFormat df = new DecimalFormat("#,###");
+		String strmoney = df.format(money);
+
+		return strmoney;
+	}
+
+}
+
+====================================================================================================
+
+----- 콤마를 이용하여 메소드 생성및 실행 -------
+
+
+import java.text.DecimalFormat;
+public class NumberCommaTest
+{
+	public static void main(String[] args) 
+	{
+		long money = 34567890123L;
+
+		System.out.println(money + "원");
+
+		// 숫자로 되어진 데이터를 세자리 마다 콤마(,)찍어주는 객체를 생성한다.
+		DecimalFormat df = new DecimalFormat("#,###");
+		
+		String strMoney = df.format(money);
+
+		System.out.println(strMoney + "원");
+	}
+}
+
+===================================================================================================
+4. 메소드안에 메소드 사용하기
+
+public class MethodInnerMethodTest
+{
+	public void showResult(int a, int b, int c){
+		System.out.println(clac(a,b,c));
+	}
+
+	public String clac(int a,int b, int c){
+		
+
+		return "평균치 : "+ avg(a,b,c);
+
+	}
+
+	public double avg(int a, int b, int c){
+	
+		int result = sum(a,b,c); //자기 자신의 클래스 파일내에서 다른 메소드를 불러올 경우 객체가 불필요하다.
+		double result2= (double)result/3; //casting 연산자 (double)데이터 
+		// 정수 나누기 정수일 경우 소수점 없앤 정수 부분만 저장한다. 10/3를 실수로 만들 경우 10.0으로 만들던지 3.0으로 만들어야 실수가 된다.
+		//쉽게 사용하기 위해서는 강제로 형변환을 시켜준다.
+		return result2;
+
+	}
+
+	public int sum(int a,int b, int c){
+		int result = a + b + c;
+		return result;
+	}
+
+}
+
+======================================================================================================
+public class MethodInnerMethodTestMain
+{
+	public static void main(String[] args) 
+	{
+		MethodInnerMethodTest obj = new MethodInnerMethodTest();
+		obj.showResult(3,3,4);
+	}
+}
+
+=================================================================================================================
+
+5. 이클립스 설치
+
+파일 새로 만들기 -> 자바 패키지 -> 소스 선택 -> 클래스 생성 
+
+한글 설정
+window -> preferences -> General ->content Types -> Java Class Fail -> UTF-8 기입
+
+General -> Workspace -> Text file encoding -> other -> utf - 8 선택
+
+General -> editors -> text editers -> spelling -> encoding utf - 8 선택
+
+
+encondig 검색 -> web 3개 encondig 부분 UTF-8 설정
+
+
+
+font 검색 -> colors and Fonts -> Basic -> Text Editor Block Selection Font -> edit -> 원하는 크기
+
+color 검색 -> java -> systax coloring -> java -> classes -> enable 색상 변경
+
+----------------------------------------------
+
+탐색기같음
+
+window -> show view -> Navigator 
