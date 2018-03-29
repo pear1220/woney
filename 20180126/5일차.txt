@@ -1,0 +1,522 @@
+1. 강제 형변환
+/*
+ 		==== **** 데이터형 변환하기 **** ====
+ 		1. 묵시적 형변환(자동 형변환)
+ 			--> 크기가 작은 것에서 크기가 큰쪽으로는 자동으로 형변환이 일어난다.
+ 			
+ 		2. 강제 형변환(casting)
+ 			--> 크기가 큰것에서 작은쪽으로는 자동으로 형변환이 불가능하므로 
+ 			크기가 큰 데이터 타입을 크기가 작은 데이터타입으로 강제적으로 형을 변경해주는것을 말한다.
+ 			이때 사용하는 것이 () 라는 casting 연산자다.
+ 			
+ 					===============================================> 자동형변환 O.K
+ 					byte  --> short  --> int  --> long  --> float  --> double
+ 					(1byte)  (2byte)   (4byte)   (8byte)   (4byte)	  (8byte)
+ 					
+ 							  char
+ 							 (2byte)
+ 		자동형변환 N.O <=============================================== 
+ */
+
+
+package my.day3;
+
+public class CastingTest {
+
+	public static void main(String[] args) {
+		
+		byte bt1 = 10;
+		int a1 = bt1; 
+		
+		int a2 = 30;
+		byte bt2 = (byte)a2;
+		
+		long ln1 = 9234567890L;
+		float ft1 =ln1;
+		
+		float ft2 = 12.4F;
+		long ln2 = (long)ft2;
+		
+		System.out.println("ln2 :"+ln2); //절사 : 소수를 정수로 변경할 경우 소수점을 버리고 정수만 나타낸다.
+		
+		double db1 = 123.96789;
+		System.out.println("db1 : " + db1 + ", (int)db1 :" + (int)db1);
+
+	}
+
+}
+2. 객체 변수 
+
+package my.day3;
+
+public class ReferenceTypeTest {
+
+	public static void main(String[] args) {
+
+		/* === ReferenceType(참조형 타입) === */
+		
+		Member me = new Member();
+		me.id = "suji";
+		me.passwd = "qwer1234";
+		me.name = "수지";
+		me.age = 23;
+		me.addr = "서울시 강남구 ";
+
+		Member suji = new Member();
+		suji.id = "suji";
+		suji.passwd = "qwer1234";
+		suji.name = "수지";
+		suji.age = 23;
+		suji.addr = "서울시 강남구 ";
+		
+		Member youjs = suji; //객체변수에 다른 객체변수를 넣으면 suji 메모리 주소를 youjs가 사용하게 된다. 그렇기 때문에 suji의 데이터가 변경되면 youjs값도 변경되며 me의 값은 변경되지 않는다.
+		
+		System.out.println("me => " + me);
+		//my.day3.Member@70dea4e // @다음에 있는 값은 메모리상의 주소이다
+		
+		System.out.println("suji => " + suji);
+		//my.day3.Member@5c647e05 // @다음에 있는 값은 메모리상의 주소이다
+		
+		System.out.println("suji => " + youjs);
+		//my.day3.Member@5c647e05 
+		
+		System.out.println("");
+		
+		boolean bool = (me == suji);
+		System.out.println("bool => " + bool);
+		//bool : false
+		
+		bool = (youjs == suji);
+		System.out.println("bool : " + bool);
+		//bool : ture
+		
+		System.out.println("\n =====데이터 변경 후=====\n");
+		
+		me.setId("leess");
+		me.setName("이순신");
+		me.setAddr("경기도 수원시");
+		
+		System.out.println("me => " + me);
+		System.out.println("suji => " + suji);
+		System.out.println("youjs => " + youjs);
+		
+		System.out.println("###################");
+		
+		youjs.setId("youjs");
+		youjs.setName("유재석");
+		youjs.setAddr("인천광역시");
+		
+		System.out.println("me => " + me);
+		System.out.println("suji => " + suji);
+		System.out.println("youjs => " + youjs);
+		
+		
+		
+	}
+
+}
+
+==========================================================================================================================
+package my.day3;
+
+public class Member {
+	
+	String id, passwd, name, addr;
+	int age;
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	
+	/*
+	 @Override
+	public String toString() {
+	} 
+	묶어서 사용
+	 */
+
+	@Override
+	public String toString() {
+		String result = "id : " + id +
+						"\npassword : " + passwd + 
+						"\nname : " + name +
+						"\nage : " + age +
+						"\naddr : " + addr + "\n";
+						
+		
+		return result;
+	}
+	
+}
+
+
+3. 반올림
+
+package my.day4.quiz;
+
+public class RoundTest {
+
+	public static void main(String[] args) {
+		
+		// 반올림에 대해서 알아본다.
+		double db1 = 93.45678, db2 = 86.8765;
+		System.out.println("db1 = "+ db1 + ", db2 = " + db2);
+
+		System.out.println("\n=== 반올림 후 ===\n");
+		
+		System.out.println("db1 = "+ Math.round(db1) + ", db2 = " + Math.round(db2)); //  소수부분은 반올림해서 정수 부분만 나타낸다.
+		
+		System.out.println("\n=== 특정 소수부 자리에서 반올림 후 ===\n");
+		// 93.45678  ==> 93 (기본 반올림)
+		// 93.45678 * 10
+		// 934.5678  ==> 935 
+		// 935/10.0  ==> 93.5
+		
+		// 93.45678 
+		// 93.45678 * 100 ==> 9345.678
+		// 9346/100.0 => 93.46
+		System.out.println("db1 = "+ Math.round(db1*10)/10.0 + ", db2 = " + Math.round(db2*10)/10.0); // 소수 둘째 자리에서 반올림하여 소수 첫째짜리까지 출력한다.
+		
+		
+		
+	}
+
+}
+
+4. 숫자 -> 문자열
+   문자열 -> 숫자 
+/*
+ 	=== *** wrapper 클래스 *** ===
+ 	
+ 	---------------------------------
+ 	기본자료형(원시형)		클래스형
+ 	---------------------------------
+ 		byte			Byte
+ 		short			Short
+ 		char			Character
+ 		int				Integer
+ 		long			Long
+ 		float			Float
+ 		double			Double
+ 		boolean			Boolean
+ 	---------------------------------
+ 	기본 자료형(원시형)은 데이터 저장 및 단순히 4칙연산에서만 사용하는 것이고,
+ 	클래스형은 데이터 저장 및 4칙연산 뿐만 아니라 다양한 기능의 메소드가 있어서 다방면으로 사용되어진다.
+ 	
+ 	====!!!!! 반드시 꼭 기억합니다. !!!!!====
+ 	웹사이트에서 입력 되어지는 모든 데이터는 그타입이 무조건!!!!
+ 	String(문자열) 타입니다.
+ 	
+ 	로그인시 아이디 입력란 : superman  ==> String(문자열)
+ 	회원가입시 나이 입력란 : 26		   ==> String(문자열)
+ 	배송일자 입력란 : 2018-01-26	   ==> String(문자열)
+ 	
+ 	그런데 웹사이트에서 숫자모양을 띄는 문자열을 받아서 4칙연산을 하고자 한다.
+ 	예> 26 + 1 =>27 "26" + 1 =261
+ 		26 - 1 =>25 "26" - 1 =>error
+ 	해결책> 문자열로 되어진 "26"을 숫자(int)형태로 바꾸어 주어야한다. 	
+ */
+
+
+package my.day3;
+
+public class WrapperTest {
+
+	public static void main(String[] args) {
+		
+		char ch = 'a';
+		System.out.println("ch : " + ch + "\n");
+		
+		Character chr ='a';
+		System.out.println("chr : " + chr + "\n");
+		
+		String str = "";
+		if (Character.isLowerCase(ch)) {
+			str = "영문소문자";
+		
+		} else if (Character.isUpperCase(ch)) {
+			str = "영문대문자";
+		} else if (Character.isDigit(ch)) {
+			str = "숫자";
+		} else {
+			str = "특수문자";
+		}
+		System.out.println("ch : " + ch +"은"+ str + "\n");
+		
+		System.out.println("==============");
+		
+		String age = "26";
+		int n = 1;
+		
+		System.out.println("age + n => " + (age+n));
+		//age + n => 261
+		
+		//문자열로 되어진 숫자(정수)를 실제 정수(숫자)로 변경한다.
+		System.out.println("age + n => " + (Integer.parseInt(age)+n));
+		//age + n => 27
+		System.out.println("age + n => " + (Byte.parseByte(age)+n));
+		System.out.println("age + n => " + (Short.parseShort(age)+n));
+		System.out.println("age + n => " + (Long.parseLong(age)+n));
+		
+		String su = "367.354364";
+		
+		System.out.println("su + 10 => " + Float.parseFloat(su)+10);
+		// su + 10 =>367.3543710
+		System.out.println("su + 10 => " + Double.parseDouble(su)+10);
+		// su + 10 =>367.35436410
+		
+		// === 숫자(정수)로 되어진 데이터를 문자열로 변경해 봅니다.
+		int jumsu = 98;
+		String str_jumsu= Integer.toString(jumsu);
+		System.out.println("str_jumsu + 1 => " + (str_jumsu +1));
+		// str_jumsu + 1 => 981
+		System.out.println("str_jumsu + 1 => " + (str_jumsu +1));
+		// str_jumsu + 1 => 981
+	}
+
+}
+--------------------------------------------------------------------------------------------------
+5. siwtch 
+
+package my.day5;
+
+import java.util.Scanner;
+
+public class SwitchTest1 {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("==아래의 값에 입력해 주세요==\n");
+		System.out.print("학번 :");
+		String number = sc.nextLine(); 
+		System.out.print("성명: ");
+		String name = sc.nextLine(); 
+		
+		System.out.print("국어: ");
+		int kor = Integer.parseInt(sc.nextLine()); 
+		System.out.print("영어: ");
+		int eng = Integer.parseInt(sc.nextLine()); 
+		System.out.print("수학: ");
+		int math = Integer.parseInt(sc.nextLine()); 
+		
+		student obj = new student(number,name,kor,eng,math);
+		
+		System.out.println("==아래의 값에 입력해 주세요==\n");
+		System.out.print("학번 :");
+		number = sc.nextLine(); 
+		System.out.print("성명: ");
+		name = sc.nextLine(); 
+		
+		System.out.print("국어: ");
+		kor = Integer.parseInt(sc.nextLine()); 
+		System.out.print("영어: ");
+		eng = Integer.parseInt(sc.nextLine()); 
+		System.out.print("수학: ");
+		math = Integer.parseInt(sc.nextLine()); 
+		
+		student obj1 = new student(number,name,kor,eng,math);
+		
+		obj.execute();
+		obj1.execute();
+		
+		sc.close();
+		
+
+	}
+
+}
+=======================================================================================================
+package my.day5;
+
+
+
+public class student {
+
+	String number,name;
+	int kor, eng, math;
+	
+	
+	
+	public student(String number,String name, int kor, int eng,int math){
+		this.number = number;
+		this.name = name;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		
+	}
+	
+	public void execute() {
+
+		String result = "====결과 ====\n" +
+				 "1. 학번 : " + number +
+				 "\n2. 성명 : " + name +
+				 "\n3. 국어 : " + kor +
+				 "\n4. 영어 : " + eng +
+				 "\n5. 수학 : " + math +
+				 "\n6. 총점 : " + sum()+
+				 "\n7. 평균 : " + avg()+
+				 "\n8. 학점 : " + jum() +
+				 "\n9. 선물: " + getGift()+"\n";
+		
+		System.out.println(result);
+	}
+	
+	public int sum() {
+		return kor+eng+math;	
+	}
+	
+	public double avg() {
+		int result = sum();
+		double result1 = (double)result/3;
+		
+		return Math.round(result1*10)/10.0;
+	}
+	
+	public String jum() {
+		/*
+		switch (변수 또는 수식) {// 변수 또는 수식이 조건에 해당됨.
+							// 변수 또는 수식의 타입은 byte, short, char, int형이어야 된다.
+							// long은 불가하다. float, double 불가능하다.
+							// JDK 1.7 (==JDK 7.0) 이후 부터는 String 타입도 허용한다.
+		case value(값1):
+			실행문1;
+			break; //{}을 빠져나간다.
+
+		case value(값2):
+			실행문2;
+			break; //{}을 빠져나간다.
+			
+		case value(값3):
+			실행문3;
+			break; //{}을 빠져나간다.
+						
+		default:
+			실행문n;
+			break;
+		}	
+		*/
+		double avg1 = avg(); //100.0 94.3 85.2 71.3 68.7 52.6 49.3
+		String hakjum = "";
+		switch ((int)avg1/10) { //100 94 85 71 68 52 49
+								//10  9  8  7  6  5  4
+		case 10: //or 라고함
+		case 9:	
+			hakjum = "A";
+			break;
+			
+		case 8: 
+			hakjum = "B";
+			break;
+			
+		case 7: 
+			hakjum = "C";
+			break;
+			
+		case 6: 
+			hakjum = "D";
+			break;
+			
+		default:
+			hakjum = "F";
+			break;
+		}
+		
+		return hakjum;		
+	}
+
+	public String getGift() {
+		String gift = "";
+		switch (jum()) {
+		case "A":
+			gift +="놀이공원 이용권, ";		// A라면 break가 없으면 밑에 case문을 실행 준다. 값이 B면 B부터 밑에 case문을 실행한다.
+		case "B":
+			gift +="뷔페식사권, ";
+		case "C":
+			gift +="치킨, ";
+		case "D":
+			gift +="아이스크림 ";
+			break;
+
+		default:
+			gift +="꿀밤 3대";
+			break;
+		}
+		return gift;
+	}
+}
+--------------------------------------------------------------------------------------------------
+6. 입력에 Integer.parseInt 사용할때 문자열이 들어간 경우 try메소드를 이용
+
+package my.day5;
+
+import java.util.Scanner;
+
+public class SwitchTest2 {
+	
+	public static void menu() {
+		System.out.println("--------Menu---------");
+		System.out.println("1. 가정용(liter 당 50원)");
+		System.out.println("2. 가정용(liter 당 45원)");
+		System.out.println("3. 가정용(liter 당 30원)");
+		System.out.println("---------------------");
+		System.out.print(">> 메뉴 번호를 선택하세요 => ");
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		SwitchTest2.menu();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int menuno = 0;
+		
+		try {
+			menuno = Integer.parseInt(sc.nextLine()); // 지역 변수를 사용할 시 메소드가 종료 되면서 변수가 사라지게 된다. 그렇기 때문에 메인에 변수를 초기화 시켜줘야 메소드가 종료되어도 main에서도 사용이 가능하다.
+		
+		} catch (NumberFormatException e) {
+			System.out.println(">>숫자만 입력하세요!!\n 프로그램 끝내겠습니다.");
+			return; // 프로그램 종료
+		}
+		
+		
+		
+		if ((menuno >=1 && menuno <=3))  {
+			System.out.println("선택하신 메뉴번호는 "+ menuno + "번 입니다.");
+		} else {
+			System.out.println("메뉴번호는 1,2,3만 가능합니다.");
+		}
+		
+		
+		
+		switch (menuno) {
+		case 1:
+		case 2:
+		case 3:
+			System.out.println("선택하신 메뉴번호는 "+ menuno + "번 입니다.");
+			break;
+		default:
+			System.out.println("메뉴번호는 1,2,3만 가능합니다.");
+			break;
+		} 
+		
+		String sam = (menuno >=1 && menuno <=3)?"선택하신 메뉴번호는 "+ menuno + "번 입니다.":"메뉴번호는 1,2,3만 가능합니다.";
+		System.out.println(sam);
+		
+	}
+
+}
+
+===========================================================================
+단축키
+ctrl + shift + / => 드래그한 부분 주석처리
+ctrl + shift + x => 드래그한 부분 대문자 변경
+ctrl + shift + y => 드래그한 부분 소문자 변경
