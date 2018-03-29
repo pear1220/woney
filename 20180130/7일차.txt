@@ -1,0 +1,652 @@
+1. 구구단 
+
+package my.day6;
+
+import java.util.Scanner;
+
+public class Gugudan {
+	public void sum(int start, int end) { //1, 10 ==> 10-1 + 1
+										  //3, 10 ==> 10-3 + 1
+										  //1, 2 ==> 2-1 + 1
+
+		int sum = start;
+		for(int i=0, j = start ; i<(end-start+1); i++,j++) {
+			sum +=j;
+		}
+		System.out.print(start+"부터"+end+"까지의 합은 "+sum+"입니다.");
+	}//end of void sum(int start, int end) =============
+	
+	public void gugudan(int start, int end) { // 5,8 => 8-5+1
+		for(int i = 0, row =1 ; i < 9 ; i++, row++) {
+			for(int j = 0, col=start ; j<(end-start+1); j++, col++) {
+				String tab = (col==end)?"\n":"\t";
+				System.out.print(col+"*"+row+"="+(col*row) + tab);
+			}
+		}
+	}// end of void gugudan(int start,int end) ===============
+	
+	
+	public static void main(String[] args) {
+		
+		System.out.println("======= 구구단 =======");
+		
+		for(int i=0 , row = 1;i<9;i++, row++) {
+			for(int j=0 ,col = 2;j<8;j++,col++) {
+				String tab = (col == 9)?"\n" : "\t";
+				System.out.print(col + "*" + row + "=" + (col*row)+tab);
+			}
+		}
+		
+		/*
+		 	문제 1) 
+		 	첫번째 수 => 2
+		 	두번째 수 => 10
+		 	결과) 2부터 10까지의 합은 54
+		 */
+		Scanner sc = new Scanner(System.in);
+		Gugudan obj = new  Gugudan();
+		
+	
+		try {
+			System.out.print("첫번째 수 => ");
+			int num1 = Integer.parseInt(sc.nextLine());
+			System.out.print("두번째 수 => ");
+			int num2 = Integer.parseInt(sc.nextLine());
+			obj.sum(num1,num2);
+			System.out.println("\n");
+			
+			System.out.print("시작단 => ");
+			num1 = Integer.parseInt(sc.nextLine());
+			System.out.print("마지막단 => ");
+			num2 = Integer.parseInt(sc.nextLine());
+			obj.gugudan(num1,num2);
+			} catch (NumberFormatException e) {
+			System.out.println("숫자가 아닙니다. 종료합니다.");
+			sc.close();
+			return;
+		}
+		/*
+		try {
+			System.out.print("첫번째 수 => ");
+			int num1 = Integer.parseInt(sc.nextLine());
+			System.out.print("두번째 수 => ");
+			int num2 = Integer.parseInt(sc.nextLine());
+			int sum = 0;
+			for(int i = num1 ; i <=num2 ; i++) {
+				sum += i;
+			
+			}System.out.println("결과) "+num1+"부터"+ num2 + "까지의 합은 " + sum);
+		} catch (NumberFormatException e) {
+			System.out.println("숫자가 아닙니다. 종료합니다.");
+			sc.close();
+			return;
+		}
+		
+		System.out.println("\n\n");
+		 	
+		/* 	
+		 	문제2)
+		 	시작단 => 5
+		 	마지막단 => 8
+		 	
+		 */
+		/*
+		try {
+			System.out.print("시작단 => ");
+			int num1 = Integer.parseInt(sc.nextLine());
+			System.out.print("마지막단 => ");
+			int num2 = Integer.parseInt(sc.nextLine());
+			
+			for(int i = 0, n = 1 ; i < 9 ; i++,n++) {
+				for(int j = num1 ; j <=num2 ; j++ ) {
+					String str = (j==num2)?"\n":"\t";
+					System.out.print( j +"*"+ n +"="
+					 + (j*n)+str);
+				}
+			}
+				
+			
+		} catch (NumberFormatException e) {
+			System.out.println("숫자가 아닙니다. 종료합니다.");
+			sc.close();
+			return;
+		}
+		sc.close();
+		*/
+
+	}//end of main()----------------------------
+
+}//end of class Gugudan ////////////////////////////////
+
+/*
+ 	2*1=2	3*1=3	4*1=4	......	9*1=9
+ 	2*2=4	3*2=6	4*2=8	......	9*2=18
+ 	2*3=6	3*3=9	4*3=12	......	9*3=27
+ 	...................................
+ 	2*8=16	3*8=24	4*8=32	......	9*8=72
+ 	2*9=18	3*9=27	4*9=36	......	9*9=81
+ */
+=============================================================================================================
+
+2.팩토리얼
+
+package my.day6;
+
+import java.util.Scanner;
+
+public class Factorial {
+	
+	public static int calc1(int num) { //5
+		
+		//5*4*3*2*1
+		int result = 1; //누적곱에 쓰이는 변수
+		
+		for(int i=num; i>0; i--) {
+			result *=i;	//result = 5*1
+						//result = 5*4*3*2*1
+		}
+		
+		return result;
+	}//end of int calc1() ---------------------
+	
+	public static int calc2(int num) {
+		// 5! ==>  5*4*3*2*1
+		if(num == 1) 
+			return 1;
+		else 
+			return num*calc2(--num); // 재귀호출이란? 메소드 자신이 자신의 메소드를 호출하는것을 말한다.
+		// 5*4*3*2*calc2(1)
+		// 5*4*3*2*1*calc2(0)
+		// 5*4*3*2*1*0*calc2(-1)
+	}//end of int calc2()-----------------
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		
+			for(;true;) {
+			try {
+			
+			System.out.print("1. 알고 싶은 팩토리얼 수 입력 ==> ");
+			int num = Integer.parseInt(sc.nextLine());
+			
+			//int result = Factorial.calc1(num);
+			int result = Factorial.calc2(num);
+			
+			System.out.println("2. 정답 : " + result);
+			
+			
+			System.out.print(">> 계속 할래요?(예:Y , 아니요:N) ==>");
+			String go = sc.nextLine();
+			if(go.equals("N") || go.equals("n")) 	break;
+			else if (go.equals("Y") || go.equals("y")) continue;
+			else System.out.println("Y와 N만 입력해주세요!!");
+			
+			
+			
+			} catch (NumberFormatException e) {
+			System.out.println("정수만 입력하세요!!");
+			continue;
+			}//end of try catch()---------------
+		}//end of for문()-------------------
+		System.out.println("프로그램 종료합니다.!!");
+		sc.close();
+	}//end of main()------------------------
+
+}
+
+================================================================================================================
+
+3. while
+
+package my.day7;
+
+/*
+ 	=== while 문 형식 ===
+ 	
+ 	변수의 초기화;
+ 		
+ 	while(조건식) {
+ 		조건식이 참(true)이라면 반복해서 실행할 명령문 계속해서 실행하고, 
+ 		조건식이 거짓(false)이라면 {} 이부분을 빠져나간다.
+ 		
+ 		반복해서 실행할 명령문;
+ 		증감식; //필수는 아니지만 많이 온다.
+ 	}
+ */
+
+public class WhileTest {
+
+	public static void main(String[] args) {
+		
+		int i=0;
+		while(i<5) {
+			
+			System.out.println((i+1)+". 안녕자바~~");
+			i++;
+		}
+		System.out.println("");
+		
+		i=0;
+		while(i++<5) {
+			System.out.println(i+". Hello JAVA~~");
+		}
+		
+		System.out.println("\n===3단===");
+		
+		i=0;
+		while(i<9) {
+			System.out.println("3*"+(i+1)+"="+3*(i+1));
+			i++;
+		}
+		System.out.println("");
+		
+		i=0;
+		while(i++<9) {
+			System.out.println("3*"+i+"="+(3*i));
+		}
+		
+		/*
+		 	3*1=3
+		 	3*2=6
+		 	3*3=9
+		 	3*4=12
+		 	3*5=15
+		 	3*6=18
+		 	3*7=21
+		 	3*8=24
+		 	3*9=27
+		 */
+		
+		System.out.println("\n===3단(짝수만)===");
+		i=0;
+		while(i++<9) {
+			if(i%2 != 0) 
+				continue;
+			else
+				System.out.println("3*"+i+"="+(3*i));
+		}
+		
+		/*
+		 	3*2=6
+		 	3*4=12
+		 	3*6=18
+		 	3*8=24
+		 */
+		System.out.println("\n===3단(6부터는 제외)===");
+		i=0;
+		while(i++<9) {
+			if(i == 6) 
+				break;
+			else
+				System.out.println("3*"+i+"="+(3*i));
+		}
+		/*
+		 	3*1=3
+		 	3*2=6
+		 	3*3=9
+		 	3*4=12
+		 	3*5=15
+		 */
+		
+		System.out.println("\n===구구단===");
+		//구구단은 9행 8열이다.
+		int row=1,col=2;
+		while(row <= 9) {// 행
+			while(col <= 9) {
+				String tab = (col ==9)?"\n":"\t";
+				System.out.print(col+"*"+row+"="+(col*row)+tab);
+				col++;
+			}// end of 내부 while----------------------
+			col=2;// 초기화를 안해주면 안에 있는 while 한번만 실행 후 돌지 않는다.
+			row++;
+		}//end of 외부 while---------------------------
+			
+		
+		System.out.println("\n\n===구구단(5,7)단 제외===");
+		
+		row =1;
+		col=2;
+		while(row <=9) {
+			while(col <= 9) {
+				
+				if(col != 3 && col !=7) {
+				String tab = (col == 9)?"\n":"\t";
+				System.out.print(col+"*"+row+"="+(col*row)+tab);
+				}//end of if()----
+				col++;
+			}// end of 내부 while----------------------
+			col=2;// 초기화를 안해주면 안에 있는 while 한번만 실행 후 돌지 않는다.
+			row++;
+		}//end of while()----------------------------
+		
+		System.out.println("\n\n===if만 이용하여 호수를 출력하라===");
+		/* if만 이용하여 만들라
+		 	501호 	502호 	503호 	505호 
+		 	301호	302호 	303호 	305호 
+		 	201호	202호 	203호 	205호
+		 	101호	102호 	103호 	105호
+		 */
+		
+		row=5;
+		col=1;
+		while(!(row < 1)) { // 참쓰는 것 보다는 거짓을 쓰면 if를 쓸 필요가 없다.
+			
+			while(!(col>5)) {
+				String tab = (col ==5)? "\n":"\t";
+				if(row !=4 && col !=4)
+				System.out.print(row+"0"+col+"호"+tab);
+				col++;
+				}//end of 내부 while()-----------
+			col=1;
+			row--;
+			
+			
+		}//end of 외부 while
+		
+		
+		
+		
+	}//end of main()---------------------------------
+
+}//end of class whileTest
+
+
+==========================================================================================================
+
+4. util
+
+package my.util;
+
+import java.util.Date;
+import java.text.DecimalFormat;
+import java.util.Random;
+
+public class MyUtil {
+	
+	public static String getNowTime(){
+		Date now = new Date();
+		String today = String.format("%tF %tT", now, now);
+		return today;
+	}
+	// -- 숫자를 입력받아서 세자리 마다 콤마(,)를 찍어서 리턴 시켜주는 메소드 생성하기 
+	public static String getCommaNumber(long num) {
+		
+		DecimalFormat df = new DecimalFormat("#,###");
+		// 숫자로 되어진 데이터를 세자리마다 콤마 (,)를 찍어주는 객체 생성함
+		
+		String strnum = df.format(num);
+		
+		return strnum;
+	}// end of String getCommaNumber()-------------------------
+
+
+
+//2개의 숫자를 입력 받아서
+//그두개 숫자 사이의 랜덤한 정수를 발생시켜서 돌려주는 메소드 생성하기
+	public static int Random(int start, int end) {
+		//램덤한 정수 = (int)(Math.random()*구간범위)+시작값;
+		
+		//return (int)(Math.random()*(end-start+1))+start;
+		//보안상 유추가 가능함
+		
+		Random rnd = new Random();
+		return rnd.nextInt(end - start + 1) + start;
+		//보안상 유추가 불가능함
+		
+	}//end of int Random()~~~~
+	
+	// --- 현재시각을 나타내기 ---
+	
+	
+}//end class MyUtil~~~
+
+
+=============================================================================================================
+
+5. do ~ while
+
+/*
+ 	=== do ~ While*() ===
+ 	
+ 	변수 초기화;
+ 	
+ 	do{
+ 		반복해서 실행할 명령문;
+ 		증감식;
+ 	} while(조건식);
+ 	
+ 	while 문의 경우 조건식이 true 일때만 반복 실행하지만,
+ 	do ~ while 문의 경우는 조건식이 false 일지라도
+ 	무조건 do {} 속에 있는 명령문은 1번은 실행하고서 반복문을 벗어난다.
+ 	
+ 	그러므로 do ~ while 문은 무조건 do{}속에 있는 명령문을 실행하고서
+ 	while(조건식) 속의 조건에 따라 참(true)이라면 계속 반복하고, 
+ 	조건이 거짓(false)이라면 중지한다. 
+ */
+
+
+
+package my.day7;
+
+public class DoWhileTest {
+
+	public static void main(String[] args) {
+		
+		int i = 0 ;
+		while(i>1) {
+			System.out.println("강민경씨는 닭똥집을 먹습니다.");
+		}
+		
+		do {
+			System.out.println("강민경씨는 햄버거를 먹습니다.");
+		} while(i>1);
+		
+		System.out.println("\n\n");
+		
+		//1부터 100까지중에 17 배수만 출력하세요.
+		int num=0, sum=0;
+		String str = "";
+		do {
+			if(++num%17 == 0) { //17배수 입니까?
+				String comma = (num>17)?", " : "";
+				str +=comma+num;
+				sum +=num;
+				
+			}
+			if(num > 100) break;
+		} while (false);
+		// 17,34,51,68,85
+		// 255
+		System.out.println("1부터 100까지중 17배수는 " + str +"입니다.");
+		System.out.println("1부터 100까지중 17배수의 합은 " + sum +"입니다.");
+		
+		System.out.println("\n=== 퀴즈 ===");
+		//아래의 출력 결과가 어떻게 나오는지 직접 손으로 적어보세요.
+		int m=1, n=10;
+		do {
+			if(m>n) break;
+			n--; //n = 9,8,7,6
+		}while(++m<5);//m= 2,3,4,5 		
+		System.out.println("m="+m+", n="+ n);
+		
+	}// end of main()---------------------------
+
+}// end of class DowhileTest/////
+
+==================================================================================================
+
+6. 랜덤
+
+package my.day7;
+
+import my.util.MyUtil;
+
+public class MathRandomTest {
+	/*
+ 	java.lang.Math.random() 메소드는
+ 	0.0 이상 1.0 미만의 실수(double)값을 랜덤하게 나타내어주는메소드이다.
+ 	즉, 0.0 <= 임의의 난수(실수) < 1.0
+	 */
+	public static void main(String[] args) {
+	
+		double random = Math.random();
+		System.out.println(random);
+		/*
+		 	랜덤(1부터 10까지의 범위를 구한다. ==> 구간범위 : 10-1+1=10)
+		 	0.0 * 구간범위(10) ==>0.0 (int)0.0 ==> 0 + 시작값(1) ==> 1
+		 	0.34 * 구간범위(10) ==> 3.4	(int)3.4 ==> 3 + 시작값(1) ==> 4
+		 	0.567 * 구간범위(10) ==> 5.67	(int)5.67 ==> 5 + 시작값(1) ==> 6
+		 	0.999 * 구간범위(10) ==> 9.99	(int)9.99 ==> 9 + 시작값(1) ==> 10
+		 	
+		 	
+		 	랜덤(13부터 18까지의 범위를 구한다. ==> 구간범위 : 18-13+1=6)
+		 	0.0 * 구간범위(6) ==>0.0 (int)0.0 ==> 0 + 시작값(13) ==> 13
+		 	0.34 * 구간범위(6) ==> 2.04	(int)2.04 ==> 2 + 시작값(13) ==> 15
+		 	0.567 * 구간범위(6) ==> 3.402	(int)3.402 ==> 3 + 시작값(13) ==> 16
+		 	0.999 * 구간범위(6) ==> 5.994	(int)5.994 ==> 5 + 시작값(13) ==> 18
+		 	
+		 	램덤한 정수 = (int)(Math.random()*구간범위)+시작값;
+		 */
+		System.out.print("1 부터 10까지중 랜덤하게 발생한 값");
+		System.out.print(MyUtil.Random(1,10));
+		
+		System.out.print("\n\n");
+		
+		System.out.print("13 부터 18까지중 랜덤하게 발생한 값");
+		System.out.print(MyUtil.Random(13,18));
+		
+		System.out.println("\n===================================");
+		
+		char ch =(char)MyUtil.Random('A', 'Z');//char는 사칙연산을 만나면 int로 변경됨 또한 char는 자동으로 형변환됨
+		System.out.println("a 부터 z까지 중 랜덤하게 발생한 소문자: "+ ch);
+		
+	}
+
+}
+
+-----------------------------------------------------------------------------------------------------
+
+package my.day7;
+
+import java.util.Random;
+
+import my.util.MyUtil;
+
+public class RandomTest {
+
+	public static void main(String[] args) {
+
+		Random rnd = new Random();
+		
+		System.out.println("1부터 10까지 중 랜덤한 수: ");
+		int rndnum = rnd.nextInt(10);
+					//rnd.nextInt(10) 0부터 9사이의 랜덤한 수 출력 
+					//rnd.nextInt(10)+1 1부터 10까지 랜덤수 출력
+		System.out.println(rndnum);
+
+		System.out.println("\n13부터 18까지 중 랜덤한 수: ");
+		// min 부터 max 사이의 랜덤한 정수를 얻으려면
+		//int rndnum = rnd.nextInt(max - min + 1) + min;
+		//int rndnum = rnd.nextInt(18 - 13 + 1) + 13;
+		//int rndnum = rnd.nextInt(6) + 13;
+		//			   0  1  2  3  4  5
+		//			   13 14 15 16 17 18]
+		
+		System.out.print(MyUtil.Random(13, 18));
+		
+		System.out.println("\n===================================");
+		
+		char ch =(char)MyUtil.Random('a', 'z');//char는 사칙연산을 만나면 int로 변경됨 또한 char는 자동으로 형변환됨
+		System.out.println("a 부터 z까지 중 랜덤하게 발생한 소문자: "+ ch);
+	}
+
+}
+=================================================================================================================
+
+7. 가위바위보
+
+package my.day7;
+
+import java.util.Scanner;
+
+import my.util.MyUtil;
+
+public class GayBayBo {
+	
+	public static void menu() {
+		System.out.println("=== *** 가위, 바위, 보 *** ===");
+		System.out.println("1. 가위 	2. 바위	3. 보	9. 게임종료");
+		System.out.println("===========================");
+		System.out.print(">> 선택하세요(1,2,3,9) => ");
+		
+	}//end of void menu()--------------------
+	public void gameResult(String userNo, int pcNo) {
+		
+		String userStr ="" , pcStr = "";
+		
+		if(userNo.equals("1"))
+			userStr = "가위";
+		else if(userNo.equals("2"))
+			userStr = "바위";
+		else if(userNo.equals("3"))
+			userStr = "보";
+		
+		if(pcNo == 1 )
+			pcStr = "가위";
+		else if(pcNo == 2)
+			pcStr = "바위";
+		else if(pcNo == 3)
+			pcStr = "보";
+		String gameResult ="";
+		if((userNo.equals("1") && pcNo == 3) ||
+		   (userNo.equals("2") && pcNo == 1) || 
+		   (userNo.equals("3") && pcNo == 2))
+			gameResult= ">> 사용자가 이겼습니다.";
+		else if((userNo.equals("1") && pcNo == 2) ||
+				(userNo.equals("2") && pcNo == 3) || 
+				(userNo.equals("3") && pcNo == 1) )
+			gameResult= ">> 컴퓨터가 이겼습니다.";
+		else
+			gameResult= ">> 비겼습니다.";
+		
+		System.out.println(">> 사용자: "+userStr+" , 컴퓨터: "+pcStr);
+		System.out.println(gameResult+"\n");
+		
+	}//end of void gameResult(String userNo, int pcNo)------------------
+	public static void main(String[] args) {
+		
+		Scanner sc =new Scanner(System.in);
+		
+		GayBayBo obj = new GayBayBo();
+		
+		do {
+			
+			GayBayBo.menu();
+			String userNo = sc.nextLine();
+			int pcNo = MyUtil.Random(1, 3);
+			
+			switch (userNo) {
+			case "1":
+			case "2":
+			case "3":
+				obj.gameResult(userNo, pcNo);
+				break;
+			case "9":
+				System.out.println(">> 게임을 종료하겠습니다.");
+				break;
+			default:
+				System.out.println(">> 메뉴에 없는 번호입니다. \n (1,2,3,9)안에서 선택하세요~\n");
+				break;
+			}
+			if("9".equals(userNo))
+				break;
+			
+							
+		} while(true); //end of main()--------------
+		System.out.println(">> 종료시각: " + MyUtil.getNowTime());
+		sc.close();
+	}//end of main()------------------------
+
+}//end of class GayBayBO /////////////////////
