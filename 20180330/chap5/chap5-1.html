@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>css()메소드를 사용하여 동적으로 css 값변경하기</title>
+<!-- 웹페이지에 버튼과 텍스트가 있고 마우를 버튼위로 올리면 텍스트의 배경과 글자색을 변경하여 텍스트를 하이라이트 하고 싶다. -->
+
+<style type="text/css">
+	#container{border:1px solid blue;
+				width: 90%;
+				height: 500px;
+				margin: 10px auto 0px auto;}
+				
+	#left_div { border: 1px solid red;
+				width: 30%;
+				float: left;} 	/* 기본은 float을 안주면 아래로 내려간다. float을 넣으면 한쪽방향으로 가라라는 뜻 */
+								/* right는 출발점이 오른쪽부터 left는 왼쪽부터 가겠다 */
+	
+	#right_div { border: 1px solid green;
+				width: 68%;
+				float: right;}
+</style>
+
+<link rel="stylesheet" type="text/css" href="/JqueryStudy/eventHandling/css/event.css"/>
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".buttons").mouseover(function(){
+			$("#left_div p").css({'background-color':'cyan' //left_div안에 p안에 있는 내용만 변경하겠다. cyan하늘색
+								, 'font-weight' : 'bold'
+								, 'font-size' : '16pt'
+								, 'color' : 'blue'
+									});
+			
+			$("#right_div p").css({'background-color':'yellow' //left_div안에 p안에 있는 내용만 변경하겠다. cyan하늘색
+								, 'font-weight' : 'bold'
+								, 'font-size' : '16pt'
+								, 'color' : 'red'
+								, 'font-family': '궁서체'
+								});
+			
+		});
+		
+		$(".buttons").mouseout(function(){
+			$("#left_div p").css({'background-color':'white' //left_div안에 p안에 있는 내용만 변경하겠다. cyan하늘색
+								, 'font-weight' : 'normal'
+								, 'font-size' : '12pt'
+								, 'color' : 'black'
+									});
+
+			$("#right_div p").css({'background-color':'white' //left_div안에 p안에 있는 내용만 변경하겠다. cyan하늘색
+								, 'font-weight' : 'normal'
+								, 'font-size' : '12pt'
+								, 'color' : 'black'
+								, 'font-family': '나눔글꼴'
+								});
+		});
+	});
+</script>
+
+</head>
+<body>
+	<div style="border: 0px solid red; 
+				height: 50px;
+				margin-top: 30px;
+				padding: 10px 0px 0px 70px;">
+		<span class="buttons">하이라이트</span>
+	</div>
+
+	<div id ="container">
+		<div id="left_div">
+			애국가1절
+			<p> <!-- 단락기호 한줄 떨어짐 -->
+			동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세
+			무궁화 삼천리 화려강사 대한사람 대한으로 길이 보전하세
+			</p><!--  보통 안닫지만 <p>안에서 만 잡으려면 닫아줘야한다. -->
+		</div>
+		
+		<div id="right_div">
+			애국가2절
+			<p>
+			남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리기상일세
+			무궁화 삼천리 화려강사 대한사람 대한으로 길이 보전하세
+			</p>
+		</div>
+	</div>
+</body>
+</html>
