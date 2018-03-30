@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>6-2. 연예인 사진 희미하게, 원래대로 보이기(css('opacity','0.2'))</title>
+
+<style type="text/css">
+	
+	#container {border: 0px solid blue;	
+	            width: 80%;
+	            margin: 0 auto; /* 시계방향(상->우->하->좌) */
+	            }
+	            
+	#firstdiv {border: 0px solid red;
+	           width: 80%;
+	           margin: 3% auto;
+	           padding-left: 25%; } 
+	           
+	#seconddiv {margin-top: 10%;}           
+	           
+	.btnName {border: 2px solid orange;	
+		      margin-right: 40px;
+		      padding: 10px 30px;
+		      font-size: 16pt;
+		      font-weight: bold;}        
+	
+	.action {border: 2px solid navy;
+			background-color: yellow;
+			 font-weight : bold;
+			font-size : 16pt;
+			 	color : blue;}	       
+	
+</style>
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){ 
+				
+		$("#seconddiv").css('opacity',0.4);
+		$("#seconddiv").html(setImg("kimth.jpg"))
+		//$("#thirddiv").html(setTitle($(".picture1").text()));
+		
+		$(".btnName").mouseover(function() {
+			
+			var $target = $(event.target);
+			
+			if($target.is(".picture1")) {
+				$("#seconddiv").html(setImg("kimth.jpg"));
+				$("#seconddiv").show();
+			
+			 	$(this).addClass("action"); 
+			}
+			else if($target.is(".picture2")) {
+				$("#seconddiv").html(setImg("iyou.jpg"));
+				$("#seconddiv").show();
+				
+				$(this).addClass("action"); 
+			}
+			else if($target.is(".picture3")) {
+				$("#seconddiv").html(setImg("parkby.jpg"));
+				$("#seconddiv").show();
+				
+				$(this).addClass("action"); 
+			}
+			
+		});
+		
+		$(".btnName").mouseout(function() {
+			$("#seconddiv").hide();
+			$("#thirddiv").hide();
+			$(this).removeClass("action"); // 초기화
+			$("#seconddiv").css('opacity',0.4);
+		});
+			
+		$(".picture1").click(function(){
+			$("#seconddiv").html(setImg("kimth.jpg"));
+			$("#seconddiv").css('opacity',1.0);
+			$("#seconddiv").show();
+			
+			$("#thirddiv").html(setTitle($(this).text()));
+			$("#thirddiv").show();
+	
+		});
+		
+		$(".picture2").click(function(){
+			$("#seconddiv").html(setImg("iyou.jpg"));
+			$("#seconddiv").css('opacity',1.0);
+			$("#seconddiv").show();		
+			
+			$("#thirddiv").html(setTitle($(this).text()));
+			$("#thirddiv").show();
+		});
+		
+		$(".picture3").click(function(){
+			$("#seconddiv").html(setImg("parkby.jpg"));
+			$("#seconddiv").css('opacity',1.0);
+			$("#seconddiv").show();
+			
+			$("#thirddiv").html(setTitle($(this).text()));
+			$("#thirddiv").show();
+		});
+		
+		$(".nopicture").click(function(){
+			$("#seconddiv").hide();
+		});
+		
+		
+		
+		
+	});
+	
+	function setImg(imgfile) {
+		
+		var result = "<img src='images/"+imgfile+"' />";
+		
+		return result;
+	}// end of setImg(imgfile)----------------------
+	
+	
+	function setTitle(title) {
+	
+		var result = "<span style='color: blue; font-size:16pt;'>"+title+"</span> 입니다.";
+		
+		return result;
+	}// end of setTitle(title)--------------------------
+	
+</script>	
+
+</head>
+<body>
+	<div id="container">
+		<div id="firstdiv">
+			<span class="btnName picture1">김태희</span>
+			<span class="btnName picture2">아이유</span>
+			<span class="btnName picture3">박보영</span>
+		</div>
+		<div id="seconddiv"></div>
+		<div id="thirddiv"></div>
+	</div>
+</body>
+</html>

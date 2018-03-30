@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>6-3. DIV를 사용한 구역나누기 </title>
+
+<link rel="stylesheet" type="text/css" href="/JqueryStudy/eventHandling/css/divtest.css"/>
+
+<style type="text/css">
+	
+	
+</style>
+
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){ 
+			
+	//	var text = func_test();
+		//console.log(text);
+	//	$("#container").html(text);
+		
+	});
+	
+	function func_test(){
+		var result = "";
+		
+		for(var i=0; i<1000; i++){
+			result += (i+1)+"안녕하세요?<br/>";
+		}// end of for ---------------
+		
+		return result;
+	}
+	
+</script>	
+
+</head>
+<body>
+	<div id="container">
+		
+	</div>
+</body>
+</html>
