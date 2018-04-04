@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>6-2. 연예인 사진 희미하게, 원래대로 보이기( css('opacity', 0.2))</title>
+
+<style type="text/css">
+	
+	#container {border: 0px solid blue;
+		   		width: 80%;
+		  		margin: 0 auto;/* 시계방향(상->우->하->좌)
+		   					  남은 20%을 균등하게 분할 한다. */	}
+	
+	#firstdiv{border: 0px solid red;
+	           width: 80%;
+	           margin: 3% auto;
+	           padding-left: 25%; } /* 모니터의 100% 가 아니라 나머지 전체를 다 쓰겟다는 말이다. 	  */
+	
+	#seconddiv {border: 0px solid green;
+				width: 20%;
+				height: 100px;
+				margin: 0px auto;
+				text-align: center;} 
+	
+	#thirddiv{border: 0px solid navy;
+			  width: 20%;
+			  margin: 7% auto 0% auto;
+			  text-align: center;
+			  color: red;} 
+	
+	.buttons {border: 2px solid orange;	
+		      margin-right: 40px;
+		      padding: 10px 30px;
+		      font-size: 16pt;
+		      font-weight: bold;}	
+	
+	.button_highlight {border: 2px solid navy;
+					   background-color: #ffe6e6;
+					   font-size: 20px;
+					   color: blue;}  
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="/JqueryStudy/eventHandling/css/event.css" />
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		$("#seconddiv").html(setImg("kimth.jpg"));
+		$("#seconddiv").css('opacity', 0.4);
+		$("#seconddiv").show();// 맨처음에 김태희 사진을 보여준다. 
+		
+		
+		
+		$(".buttons").mouseover(function(){
+			
+			var $target = $(event.target);
+			
+			if($target.is(".picture1")){
+				$("#seconddiv").html(setImg("kimth.jpg"));
+				$("#seconddiv").css('opacity', 0.4);
+		
+				$("#seconddiv").show();
+				$(this).addClass("button_highlight");$
+			}
+			else if($target.is(".picture2")){
+				$("#seconddiv").html(setImg("iyou.jpg"));
+				$("#seconddiv").css('opacity', 0.4);
+		
+				$("#seconddiv").show();
+				$(this).addClass("button_highlight");
+			}
+			else if($target.is(".picture3")){
+				$("#seconddiv").html(setImg("parkby.jpg"));
+				$("#seconddiv").css('opacity', 0.4);
+		
+				$("#seconddiv").show();
+				$(this).addClass("button_highlight");
+			}
+		});	
+									 
+		$(".buttons").mouseout(function(){
+		   	$("#seconddiv").hide();
+		   	$("#thirddiv").hide();
+		   	$(this).removeClass("button_highlight");
+		});
+		
+		
+		
+		$(".buttons").click(function(){
+			
+			var $target = $(event.target);
+			
+			if($target.is(".picture1")){
+				$("#seconddiv").html(setImg("kimth.jpg"));
+				$("#seconddiv").css('opacity', 1.0);
+				$("#thirddiv").html(setTitle($(this).text()));
+		
+				$("#seconddiv").show();
+				$("#thirddiv").show();
+				
+			}
+			else if($target.is(".picture2")){
+				$("#seconddiv").html(setImg("iyou.jpg"));
+				$("#seconddiv").css('opacity', 1.0);
+				$("#thirddiv").html(setTitle($(this).text()));
+		
+				$("#seconddiv").show();
+				$("#thirddiv").show();
+			}
+			else if($target.is(".picture3")){
+				$("#seconddiv").html(setImg("parkby.jpg"));
+				$("#seconddiv").css('opacity', 1.0);
+				$("#thirddiv").html(setTitle($(this).text()));
+		
+				$("#seconddiv").show();
+				$("#thirddiv").show();
+			}
+			
+		}); 
+		 
+	});
+	
+	function setImg(imgfile){
+		
+		var result ="<img src='images/"+imgfile+"' />";
+		
+		return result; // 태그를 넘겨준다.
+	}	
+
+	function setTitle(title){
+		
+		var result ="<span style='color: blue; font-size:16pt;'>"+title+"</span> 입니다.";
+		
+		return result; // 태그를 넘겨준다.
+		
+	}// end of function setImg(imgfile)-----------------------------------
+	
+	
+		
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id="firstdiv">
+			<span class="buttons picture1">김태희</span>
+			<span class="buttons picture2">아이유</span>
+			<span class="buttons picture3">박보영</span>
+			
+		</div>
+		
+		<div id="seconddiv"></div>
+		<div id="thirddiv"></div>
+	
+	
+	</div>
+</body>
+</html>

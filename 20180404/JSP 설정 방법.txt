@@ -1,0 +1,5 @@
+Dynamic web project선택
+MyWeb 오른쪽 클릭 build path -> configure build path-> add external jars 추가 => C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib\ojdbc6.jar
+C:\apache-tomcat-8.0.50\lib\el-api.jar
+C:\apache-tomcat-8.0.50\lib\jsp-api.jar
+C:\apache-tomcat-8.0.50\lib\servlet-api.jar

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>12-1. 이미지 스크롤하기[animate(), slideUp() 메소드]</title>
+<!-- 
+	이미지를 클릭하면 이미지가 왼쪽에서 오른쪽으로 이동(스크롤)하게 만든다.
+	slideUp() 메소드를 사용해서 이미지를 보이지 않게 한다.
+ -->
+ 
+<style type="text/css">
+	#fish1 {position: absolute;}
+	
+	#fish2 {position: relative;}
+	
+</style>
+<script src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$("#fish1").click(function(){
+			$(this).animate({left:600, top:500}, 5000);
+		}); /*	left:600, top:500 가 도착위치, 5000밀리초 동안 목적지까지 간다.
+				선택자인 이미지를 position(absolute, relative)에 따라 left 600, top 500 의 위치로 설정시간동안 이동한다.
+			*/
+		
+		$("#fish2").click(function(){
+			$(this).animate({left:600, top:500}, 'slow').slideUp('slow');
+		}); /*
+				'slow' 	 -> 600밀리초
+				'normal' -> 400밀리초
+				'fast'	 -> 200밀리초
+			*/
+		
+	});
+</script>
+	
+</head>
+<body>
+	<img id="fish1" src="images/fish.jpg" />
+	<p><p><p>
+	<img id="fish2" src="images/fish.jpg" />
+</body>
+</html>

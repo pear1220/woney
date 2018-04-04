@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>12-3. 이미지 스크롤 하기 [ 스크롤 동안 이미지 확대하기 animate() ]</title>
+<!-- 이미지를 클릭하면 왼쪽에서 오른쪽으로 스크롤 되게 하고 싶다. 
+	  이미지가 스크롤 되면서 이미지의 크기를 변경해주고 싶다. 
+-->
+<style type="text/css">
+
+	
+	img {position: relative;}/* 원래있던 자기 위치로 부터 그림이  왼쪽으로 600px 을 떨어뜨리고 위로는 500px 을 떨어뜨려야 한다. */	
+	
+	
+
+</style>
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$("img").click(function(){
+			
+			$(this).animate({left:600
+						   , top:500
+						   , width:$(this).width()*2
+						   , height:$(this).height()*2}, 'slow').fadeTo(1000, 0.1, myTest);	
+			
+			/* 선택자인 이미지를 position에 따라 (absolute, relative)에 따라 
+			      왼쪽에서부터 600px, 위에서 부터 500px 떨어진 위치로 
+			   5000밀리초(== 5초) 동안 옮긴다.
+			   
+			    선택자.fadeTo(1000, 0.1, myTest());	
+			==> 선택자의 엘리먼트의 투명도를 조정해주는 메소드이다.
+				1000 밀리초(== 1초)
+				0.1 opacity(투명도) 0.0(투명) ~ 1.0 (불투명, 원래색)
+				myTest() 은 callback 함수라고 부른다. 
+			*/
+		});
+		
+	});
+	
+	function myTest() {
+		alert("이미지 투명도가 0.1이 된 다음에 실행하는 함수");
+		// 'slow' == 600 밀리초 'normal' == 400밀리초 'fast' == 200 밀리초
+	}
+
+
+</script>
+
+
+</head>
+<body>
+	<img src="images/fish.jpg" />
+</body>
+</html>

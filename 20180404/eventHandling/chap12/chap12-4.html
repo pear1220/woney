@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>12-4. 이미지 스크롤 하기 [ 오른쪽으로 스크롤 되고, 다시 왼쪽으로 스크롤 되기 ]</title>
+<!-- 이미지를 클릭하면 왼쪽에서 오른쪽으로 스크롤 되게 하고 싶다. 
+	  이미지가 스크롤 되면서 이미지의 크기를 변경해주고 싶다. 
+-->
+<style type="text/css">
+
+	
+	img {position: relative;}/* 원래있던 자기 위치로 부터 그림이  왼쪽으로 600px 을 떨어뜨리고 위로는 500px 을 떨어뜨려야 한다. */	
+	
+	
+
+</style>
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$("img").click(function(){
+			
+			$(this).animate({left:600, top:500}
+						   , 'slow' // 물고기를 옮긴다.
+						   , function() { // 실행해야 할 callback 함수 
+								$(this).fadeTo(1000,0.0); // 1초 동안 투명도 0.0 으로 
+								$(this).fadeTo(1000,1.0);
+								$(this).animate({left:0, top:0}, 'slow');
+								
+							});	
+		
+		});
+		/* 선택자.animate(properties
+					  , speed
+					  , callback);
+		 -- properties : 엘리멘트가 애니메이션이 ㄲㅌ나고 갖게 될 속성을 의미한다.
+		 -- speed : 애니메이션이 완료되는 시간으로 단위는 밀리초이다.
+		 			'slow' == 600 밀리초
+		 			'normal' == 400밀리초
+		 			'fast' == 200 밀리초
+		 -- callback : 애니메이션이 끝나고 나서 자동으로 실행되는 함수이다.()*/
+	});
+	
+	
+
+</script>
+
+
+</head>
+<body>
+	<img src="images/fish.jpg" />
+</body>
+</html>

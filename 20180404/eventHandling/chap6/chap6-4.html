@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>6-4. DIV</title>
+
+<link rel="stylesheet" type="text/css" href="/JqueryStudy/eventHandling/css/divtest.css" />
+
+<style type="text/css">
+	
+
+</style>
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+	
+		$(".tdImg img").css('opacity', 0.4);
+		$(".tdImg2 img").css('opacity', 0.4);
+		
+		$(".tdMenu").hover(function(){
+			
+			var $target = $(event.target);
+			
+			if($target.is(".tdMenu1")){
+				$(".tdMenu1").addClass("tdFont");
+				$(".tdImg1 img").css('opacity', 1.0);
+	
+			}
+			else if($target.is(".tdMenu2")){
+				$(".tdMenu2").addClass("tdFont");
+				$(".tdImg2 img").css('opacity', 1.0);
+						
+			}
+			else if($target.is(".tdMenu3")){
+				$(".tdMenu3").addClass("tdFont");
+				$(".tdImg3 img").css('opacity', 1.0);
+						
+			}
+		},
+							 function(){
+
+				$(".tdMenu").removeClass("tdFont");
+				$(".tdImg img").css('opacity', 0.4);
+			
+		});
+
+		
+		$(".tdImg").click(function() {
+			
+			var $target = $(event.target);
+			
+			
+			
+			if($target.is(".tdImg1 img")){
+				
+				$(".tdImg1").html(setImg("kimthLarge.jpg"));
+				
+				$(".tdImg2").html(setImg("iyou.jpg"));
+				$(".tdImg2 img").css('opacity', 0.2);
+				$(".tdImg3").html(setImg("parkby.jpg"));
+				$(".tdImg3 img").css('opacity', 0.2);
+			}
+			
+			else if($target.is(".tdImg2 img")){
+				
+				$(".tdImg2").html(setImg("iyouLarge.jpg"));
+				
+				$(".tdImg1").html(setImg("kimth.jpg"));
+				$(".tdImg1 img").css('opacity', 0.2);
+				$(".tdImg3").html(setImg("parkby.jpg"));
+				$(".tdImg3 img").css('opacity', 0.2);
+			}
+			
+			else if($target.is(".tdImg3 img")){
+				
+				$(".tdImg3").html(setImg("parkbyLarge.jpg"));
+				
+				$(".tdImg1").html(setImg("kimth.jpg"));
+				$(".tdImg1 img").css('opacity', 0.2);
+				$(".tdImg2").html(setImg("iyou.jpg"));
+				$(".tdImg2 img").css('opacity', 0.2);
+			}
+			
+		});
+		
+		 
+	});
+
+	/* function func_test() {
+		var result = "";
+		
+		for(var i=0; i<1000; i++) {
+		    result += (i+1)+". 안녕하세요?<br/>";		
+		}// end of for--------------
+		
+		return result;
+	}
+	 */
+	function setImg(imgfile){
+		
+		var result ="<img src='images/"+imgfile+"' />";
+		
+		return result; // 태그를 넘겨준다.
+	}
+	
+	
+		
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<table id="tbl_menu">
+				<tr>
+					<td class="tdMenu tdFont tdMenu1">김태희</td>
+					<td class="tdMenu tdFont tdMenu2">아이유</td>
+					<td class="tdMenu tdFont tdMenu3">박보영</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="content">
+			<table id="tblContent">
+				<tr>
+					<td class="tdImg tdImg1"><img src="images/kimth.jpg" alt="김태희" /></td>
+					<td class="tdImg tdImg2"><img src="images/iyou.jpg" alt="아이유" /></td>
+					<td class="tdImg tdImg3"><img src="images/parkby.jpg" alt="박보영" /></td>	
+					<!-- img의 alt 속성은 img가 나타나지 않은 오류가 생겼을 때 글씨를 출력하기 위해 글씨에 이름을 정해주는 것이다. -->		
+				</tr>
+				
+			</table>
+			
+			<table id="tblContent2">
+				<tr>
+					<td class="tdImg2 tdImg2-1"><img src="images/kimth.jpg" alt="김태희" /></td>
+					<td class="tdImg2 tdImg2-2"><img src="images/iyou.jpg" alt="아이유" /></td>
+					<td class="tdImg2 tdImg2-3"><img src="images/parkby.jpg" alt="박보영" /></td>			
+				</tr>
+				
+			</table>
+		</div>
+		
+		<div id="sideInfo">
+		
+		</div>	
+		
+		<div id="footer">
+		
+		</div>
+	</div>
+</body>
+</html>

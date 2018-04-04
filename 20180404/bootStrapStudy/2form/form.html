@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>bootsnipp.com 사이트를 이용한 폼만들기</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 인터넷을 사용안한 경우 --> 
+  <link rel="stylesheet" href="/JqueryStudy/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <script src="/JqueryStudy/js/jquery-3.3.1.min.js"></script>
+  <script src="/JqueryStudy/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Form Name</legend>
+
+<!-- Button Drop Down -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttondropdown">Button Drop Down</label>
+  <div class="col-md-4">
+    <div class="input-group">
+      <input id="buttondropdown" name="buttondropdown" class="form-control" placeholder="placeholder" type="text">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Action
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu pull-right">
+          <li><a href="#">Option one</a></li>
+          <li><a href="#">Option two</a></li>
+          <li><a href="#">Option three</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">Option one</option>
+      <option value="2">Option two</option>
+    </select>
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="button1id">Double Button</label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success">Good Button</button>
+    <button id="button2id" name="button2id" class="btn btn-danger">Scary Button</button>
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="radios">Inline Radios</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="radios-0">
+      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+      1
+    </label> 
+    <label class="radio-inline" for="radios-1">
+      <input type="radio" name="radios" id="radios-1" value="2">
+      2
+    </label> 
+    <label class="radio-inline" for="radios-2">
+      <input type="radio" name="radios" id="radios-2" value="3">
+      3
+    </label> 
+    <label class="radio-inline" for="radios-3">
+      <input type="radio" name="radios" id="radios-3" value="4">
+      4
+    </label>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Text Input</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
+  <span class="help-block">help</span>  
+  </div>
+</div>
+
+<!-- Multiple Checkboxes (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes">Inline Checkboxes</label>
+  <div class="col-md-4">
+    <label class="checkbox-inline" for="checkboxes-0">
+      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      1
+    </label>
+    <label class="checkbox-inline" for="checkboxes-1">
+      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      2
+    </label>
+    <label class="checkbox-inline" for="checkboxes-2">
+      <input type="checkbox" name="checkboxes" id="checkboxes-2" value="3">
+      3
+    </label>
+    <label class="checkbox-inline" for="checkboxes-3">
+      <input type="checkbox" name="checkboxes" id="checkboxes-3" value="4">
+      4
+    </label>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textarea">Text Area</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="passwordinput">Password Input</label>
+  <div class="col-md-4">
+    <input id="passwordinput" name="passwordinput" type="password" placeholder="placeholder" class="form-control input-md">
+    <span class="help-block">help</span>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-earphone"></span> 우리회사전화연결</a>
+<br/>
+<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> 찾기</a>
+<br/>
+<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> 쓰레기통</a>
+</body>
+</html>

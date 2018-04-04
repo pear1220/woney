@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>13-1. keydown, keyup 이벤트 구분하기 </title>
+<!-- 키보드를 누르고
+-->
+
+<script type="text/javascript" src="/JqueryStudy/js/jquery-2.0.0.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$("#text1").bind("keydown", function(){
+			$("#text2").val($(this).val()); // text1에 입력한 값을 text2 에 넣어라
+											// keydown은 text1에 입력할 때 text2에 들어온다. 
+		});										
+
+		$("#text3").bind("keyup", function(){// text3에 keyup 되면 text4에 넣어라
+			$("#text4").val($(this).val());  // keyup은 text3에 입력하고 손떼면 text4에 들어온다.
+											 // 입력한 글자 그대로 읽어온다. (로그인할 때 주로 쓰인다.)
+		});
+		
+	});
+
+
+</script>
+
+
+</head>
+<body>
+	<form>
+		텍스트1(keydown) : <input type="text" id="text1" /> <br/>
+		텍스트2(keydown) : <input type="text" id="text2" /> <br/>
+		<p><p>
+		텍스트3(keyup) : <input type="text" id="text3" /> <br/>
+		텍스트4(keyup) : <input type="text" id="text4" /> <br/>
+	</form>
+</body>
+</html>
